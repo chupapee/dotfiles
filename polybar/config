@@ -41,7 +41,7 @@ font-2 = Fira Code:pixelsize=10;1
 modules-left = bspwm i3
 # modules-center = mpd
 modules-center = xwindow
-modules-right = filesystem pulseaudio xkeyboard memory cpu wlan eth temperature battery date powermenu
+modules-right = pulseaudio xkeyboard memory cpu wlan eth temperature battery date powermenu
 
 tray-position = right
 tray-padding = 1
@@ -81,15 +81,15 @@ label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
 label-indicator-underline = ${colors.secondary}
 
-[module/filesystem]
-type = internal/fs
-interval = 25
+; [module/filesystem]
+; type = internal/fs
+; interval = 25
 
-mount-0 = /
+; mount-0 = /
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+; label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+; label-unmounted = %mountpoint% not mounted
+; label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/bspwm]
 type = internal/bspwm
@@ -189,7 +189,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = "CPU:"
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
 label = %percentage:2%%
@@ -197,7 +197,7 @@ label = %percentage:2%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "🔲 "
+format-prefix = "MEM:"
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = %percentage_used%%
@@ -244,7 +244,7 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date =
+date = "%d.%m.%y |"
 date-alt = " %Y-%m-%d"
 
 time = %H:%M
@@ -260,13 +260,13 @@ label = %date% %time%
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
-label-volume-foreground = ${root.foreground}
+label-volume = VOL: %percentage%%
+label-volume-foreground = ${colors.foreground-alt}
 
 label-muted = 🔇 muted
 label-muted-foreground = #666
 
-bar-volume-width = 10
+bar-volume-width = 5
 bar-volume-foreground-0 = #55aa55
 bar-volume-foreground-1 = #55aa55
 bar-volume-foreground-2 = #55aa55
@@ -317,13 +317,17 @@ battery = BAT0
 adapter = AC
 full-at = 98
 
+format-charging-prefix = "chr:"
+format-charging-prefix-foreground = ${colors.foreground-alt}
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
 
+format-discharging-prefix = "bat:"
+format-discharging-prefix-foreground = ${colors.foreground-alt}
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = " "
+format-full-prefix = "bat:"
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
@@ -348,6 +352,9 @@ animation-discharging-framerate = 750
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
+
+format-prefix = "t:"
+format-prefix-foreground = ${colors.foreground-alt}
 
 format = <ramp> <label>
 format-underline = #f50a4d
