@@ -7,4 +7,4 @@ killall -q polybar
 while grep -x polybar >/dev/null; do sleep 1; done
 
 # Launch the example bar
-polybar main_bar
+polybar main-bar
