@@ -270,7 +270,7 @@ for_window [instance="copyq"] floating enable
 for_window [instance="copyq"] resize set 500 500
 for_window [instance="copyq"] border pixel 0
 
-exec_always picom
+exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # TODO: replace with custom notifier script
 exec --no-startup-id cbatticon -l 20 -r 10
