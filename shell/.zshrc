@@ -102,9 +102,26 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias i="sudo apt install"
+alias u="sudo apt update"
+alias uu="sudo apt upgrade"
+# alias m="make"
+# alias n="nvim"
+# alias v="vim"
+alias e="z"
+alias c="clear"
+alias q="exit"
+if [ -x "$(command -v eza)" ]; then
+    alias l="eza --icons"
+    alias lt="eza --tree --icons"
+    alias la="eza -la --icons"
+    alias lat="eza -la --tree --icons"
+    alias li="eza -li --icons"
+    alias lit="eza -li --tree --icons"
+    alias ld="eza -D --icons"
+    alias ldt="eza -D --tree --icons"
+    alias lf="eza -f --icons"
+    alias lft="eza -f --tree --icons"
+fi
 
 eval "$(zoxide init zsh)"
