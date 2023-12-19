@@ -105,6 +105,7 @@ source $ZSH/oh-my-zsh.sh
 alias i="sudo apt install"
 alias u="sudo apt update"
 alias uu="sudo apt upgrade"
+alias st="~/.config/i3/scripts/theme-switcher.sh"
 # alias m="make"
 # alias n="nvim"
 # alias v="vim"
