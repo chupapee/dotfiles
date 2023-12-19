@@ -228,7 +228,7 @@ bindsym $mod+r mode "resize"
 # }
 
 # lock screen
-bindsym $mod+Shift+x exec --no-startup-id i3lock -i ~/Downloads/wallpapers/gravity-falls/tower-forest.png
+bindsym $mod+Shift+x exec --no-startup-id shuf -e -n1 ~/Downloads/wallpapers/*.png | xargs i3lock -t -i # set random .png image
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
@@ -263,7 +263,8 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection c
 focus_on_window_activation urgent
 
 # set wallpaper
-exec_always feh --bg-scale ~/Downloads/wallpapers/tlou/ellie-with-guitar.jpg
+# TODO: change wallpaper every X time (slideshow)
+exec_always --no-startup-id shuf -e -n1 ~/Downloads/wallpapers/* | xargs feh --bg-scale # set random wallpaper
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ~/.config/i3/scripts/polybar-visibility-toggler.sh
 exec_always --no-startup-id "sleep 1; setxkbmap -layout us,ru -variant ,, -option grp:alt_shift_toggle"
