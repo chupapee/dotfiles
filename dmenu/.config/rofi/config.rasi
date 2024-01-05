@@ -160,4 +160,4 @@ configuration {
   }
 }
 
-@theme "catppuccin-theme"
+@theme "catppuccin-dark"
