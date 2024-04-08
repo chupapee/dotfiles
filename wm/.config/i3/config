@@ -280,7 +280,7 @@ exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 # TODO: replace with custom notifier script
 exec --no-startup-id cbatticon -l 20 -r 10
 
-for_window [title="nvim"class="Alacritty"] move to $ws2;
+for_window [title="nvim"class="Alacritty"] move to $ws2
 
 # make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
