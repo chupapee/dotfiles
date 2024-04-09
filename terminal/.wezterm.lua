@@ -41,6 +41,7 @@ return {
   },
   default_prog = { "/usr/bin/zsh" },
   scrollback_lines = 1000,
+  check_for_updates = false,
 
   font = wezterm.font 'Fira Code',
   font_size = 12.0,
