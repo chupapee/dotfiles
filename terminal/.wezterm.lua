@@ -50,4 +50,81 @@ return {
   cursor_blink_ease_in = 'Constant',
   cursor_blink_rate = 700,
   cursor_blink_ease_out = 'Constant',
+  window_close_confirmation = "NeverPrompt",
+
+  unix_domains = {
+    {
+        name = "unix",
+    },
+  },
+  keys = {
+    {
+      key = "p",
+      mods = "SUPER",
+      action = wezterm.action.ActivateCommandPalette,
+    },
+    {
+      key = 'L',
+      mods = 'CTRL',
+      action = wezterm.action.ShowDebugOverlay
+    },
+    -- create pane
+    {
+      key = "LeftArrow",
+      mods = "ALT|CTRL",
+      action = wezterm.action.SplitPane({
+          top_level = true,
+          direction = "Left",
+          size = { Percent = 50 },
+      }),
+    },
+    {
+      key = "RightArrow",
+      mods = "ALT|CTRL",
+      action = wezterm.action.SplitPane({
+          top_level = true,
+          direction = "Right",
+          size = { Percent = 50 },
+      }),
+    },
+    {
+      key = "UpArrow",
+      mods = "ALT|CTRL",
+      action = wezterm.action.SplitPane({
+          top_level = true,
+          direction = "Up",
+          size = { Percent = 50 },
+      }),
+    },
+    {
+      key = "DownArrow",
+      mods = "ALT|CTRL",
+      action = wezterm.action.SplitPane({
+          top_level = true,
+          direction = "Down",
+          size = { Percent = 50 },
+      }),
+    },
+    -- switch between panes
+    {
+      key = "LeftArrow",
+      mods = "ALT",
+      action = wezterm.action({ ActivatePaneDirection = "Left" }),
+    },
+    {
+      key = "RightArrow",
+      mods = "ALT",
+      action = wezterm.action({ ActivatePaneDirection = "Right" }),
+    },
+    {
+      key = "UpArrow",
+      mods = "ALT",
+      action = wezterm.action({ ActivatePaneDirection = "Up" }),
+    },
+    {
+      key = "DownArrow",
+      mods = "ALT",
+      action = wezterm.action({ ActivatePaneDirection = "Down" }),
+    },
+  }
 }
