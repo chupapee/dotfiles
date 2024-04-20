@@ -11,130 +11,67 @@
 
 set $mod Mod4
 
-# define color
-set $bg     #2c2c2e
-set $fg     #9f9f9f
-set $hi     #efef8f
-set $ac     #116655
-set $tx     #f1f1f1
-set $ia     #8f8f8f
-set $be     #8faf9f
-set $yw     #f8f893
-set $gn     #88b090
-set $rd     #e89393
-set $id     #1c4a1c
-set $ce     #ceecee
-
-# set some nice colors      border  background  text    indicator
-# dracula
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-client.background       #F8F8F2
-
 default_border pixel 0
 default_floating_border pixel 0
+gaps inner 10
+gaps outer 1
+smart_gaps on # only draw gaps if more than one container is in the workspace
 for_window [class="^.*"] border pixel 0
-
-# floating_minimum_size 1000 x 600
-
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:Inconsolata Medium 11
-
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex --autostart --environment i3
-exec_always --no-startup-id sxhkd -c ~/.config/sxhkd/sxhkdrc
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
-
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+# floating_minimum_size 1000 x 600
 
 # start a terminal
+# bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec bash
+# bindsym $mod+Return exec alacritty
 bindsym $mod+Return exec wezterm-gui
 
 # kill focused window
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
+# bindcode $mod+d exec --no-startup-id i3-dmenu-desktop
 # bindsym $mod+d exec --no-startup-id "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10' -p 'dmenu%'"
 bindsym $mod+d exec --no-startup-id rofi -show drun
-
-# A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
-
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
-
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym $mod+m exec --no-startup-id ~/.config/i3/scripts/theme-toggler.sh
-# split in horizontal orientation
-# bindsym $mod+h split h
-
-# split in vertical orientation
-# bindsym $mod+v split v
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
+bindsym $mod+space floating toggle
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout toggle split
 # focus the parent container
-bindsym $mod+a focus parent
-
+# bindsym $mod+a focus parent
 # focus the child container
-#bindsym $mod+d focus child
+#bindsym $mod+c focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -166,6 +103,7 @@ assign [class="Code"] $ws2
 assign [class="TelegramDesktop"] $ws3
 
 for_window [urgent="latest"class="Code|firefox"] focus
+for_window [title="nvim"class="Alacritty"] move to $ws2
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -228,69 +166,60 @@ bindsym $mod+r mode "resize"
 # }
 
 # lock screen
-bindsym $mod+Shift+x exec --no-startup-id shuf -e -n1 ~/Downloads/wallpapers/*.png | xargs i3lock -t -i # set random .png image
+bindsym $mod+Shift+x exec --no-startup-id shuf -e -n1 ~/wallpapers/*.png | xargs i3lock -t -i # set random .png image
 
+# switch system theme
+bindsym $mod+m exec --no-startup-id ~/.config/i3/scripts/theme-switcher.sh
+
+# Use pactl to adjust volume in PulseAudio.
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
-
-# Touchpad controls
-bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-
-# Screenshots
-# bindsym $mod+Print exec --no-startup-id maim "~/Pictures/$(date)"
-# bindsym $mod+Shift+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "~/Pictures/Screenshots/$(date)"
-# bindsym Shift+Print exec --no-startup-id maim --select "~/Pictures/Screenshots/$(date)"
-
-## Clipboard Screenshots
-# bindsym Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
-# bindsym Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -3% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# Touchpad controls
+# bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 # screenshots
-bindsym $mod+Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
-# bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
-
+bindsym $mod+Print exec --no-startup-id maim "/home/$USER/Pictures/screenshots/$(date)"
 ## clipboard screenshots
 bindsym Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
-bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+bindsym Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
 focus_on_window_activation urgent
 
-# set wallpaper
+# select and set random wallpaper
 # TODO: change wallpaper every X time (slideshow)
-exec_always --no-startup-id shuf -e -n1 ~/Downloads/wallpapers/* | xargs feh --bg-scale # set random wallpaper
+exec_always --no-startup-id shuf -e -n1 ~/wallpapers/* | xargs feh --bg-scale
+bindsym $mod+w exec shuf -e -n1 ~/wallpapers/* | xargs feh --bg-scale
+
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ~/.config/i3/scripts/polybar-visibility-toggler.sh
+
+# switch keyboard language
 exec_always --no-startup-id "sleep 1; setxkbmap -layout us,ru -variant ,, -option grp:alt_shift_toggle"
 
-exec_always copyq
-bindsym $mod+v exec --no-startup-id copyq show
+# clipboard manager
+exec_always --no-startup-id copyq
+bindsym $mod+v exec --no-startup-id copyq show; [instance="copyq"] focus
 for_window [instance="copyq"] floating enable
-for_window [instance="copyq"] resize set 500 500
+for_window [instance="copyq"] resize set 600 600
 for_window [instance="copyq"] border pixel 0
 
+# compositor
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 
+# notification-daemon
+exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
+
+# battery status notifier
 # TODO: replace with custom notifier script
 exec --no-startup-id cbatticon -l 20 -r 10
-
-for_window [title="nvim"class="Alacritty"] move to $ws2
-
-# make the currently focused window a scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-gaps inner 10
-gaps outer 1
-smart_gaps on # only draw gaps if more than one container is in the workspace
-
-# show the first scratchpad window
-bindsym $mod+minus scratchpad show
-
-# toggle the stikyness of a currently focused window
-bindsym $mod+Ctrl+space sticky toggle

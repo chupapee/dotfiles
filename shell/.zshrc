@@ -102,9 +102,9 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-alias i="sudo apt install"
-alias u="sudo apt update"
-alias uu="sudo apt upgrade"
+alias i="sudo pacman -S"
+alias u="sudo pacman -Syy"
+alias uu="sudo pacman -Syu"
 alias st="~/.config/i3/scripts/theme-switcher.sh"
 # alias m="make"
 # alias n="nvim"
